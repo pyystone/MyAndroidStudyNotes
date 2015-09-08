@@ -7,18 +7,20 @@ import android.view.MenuItem;
 import android.view.View;
 
 import pyystone.androidstudynotes.ui.UIActivity;
+import pyystone.androidstudynotes.version.VersionMgrActivity;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initUI();
+
+    protected void initUI() {
+        findViewById(R.id.UI).setOnClickListener(this);
+        findViewById(R.id.thread).setOnClickListener(this);
+        findViewById(R.id.version).setOnClickListener(this);
     }
 
-    private void initUI() {
-        findViewById(R.id.UI).setOnClickListener(this);
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 
     @Override
@@ -49,6 +51,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         Intent intent = new Intent();
         if (id == R.id.UI) {
             intent.setClass(this, UIActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.thread) {
+
+        } else if (id == R.id.version) {
+            intent.setClass(this, VersionMgrActivity.class);
             startActivity(intent);
         }
 

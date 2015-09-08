@@ -22,18 +22,16 @@ import pyystone.androidstudynotes.R;
 public class UIActivity extends BaseActivity implements AdapterView.OnItemClickListener {
     private static final int GOTO_GIFUI = 1;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.ui_activity);
-        initUI();
-    }
-
-    public void initUI() {
+    protected void initUI() {
         ListView listView = (ListView) findViewById(R.id.listview);
         BaseListAdapter adapter = new BaseListAdapter(getListViewData(),this);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.ui_activity;
     }
 
     public List<ListItemData> getListViewData() {

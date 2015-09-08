@@ -36,9 +36,8 @@ public class GifUIActivtiy extends BaseActivity implements View.OnClickListener 
     private Button btnToggle;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gif_ui_activity);
         gifImageView = (GifImageView) findViewById(R.id.givTest);
         btnToggle = (Button) findViewById(R.id.btnController);
         btnToggle.setOnClickListener(this);
@@ -49,6 +48,11 @@ public class GifUIActivtiy extends BaseActivity implements View.OnClickListener 
                 downloadImage();
             }
         }).start();
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.gif_ui_activity;
     }
 
     public void downloadImage() {
