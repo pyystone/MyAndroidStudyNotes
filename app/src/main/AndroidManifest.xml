@@ -24,6 +24,13 @@
         <activity android:name=".ui.UIActivity"/>
         <activity android:name=".ui.GifUIActivtiy"/>
         <activity android:name=".version.VersionMgrActivity"/>
+        <activity android:name=".memory.handler.HandlerMainActivity"/>
+        <activity android:name=".memory.handler.Handler2MainLoopActivity"/>
+        <activity android:name=".memory.handler.HandlerBaseActivity"/>
+        <activity android:name=".memory.handler.HandlerStaticActivity"/>
+        <activity android:name=".memory.handler.HandlerActivity"/>
+        <activity android:name=".memory.handler.HandlerWeakActivity"/>
+        <activity android:name=".memory.handler.HandlerWeakHandlerActivity"/>
 
     </application>
 

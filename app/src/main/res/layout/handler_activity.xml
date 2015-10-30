@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <Button
+        android:id="@+id/gotoHandlerActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="handlerActivity"
+        />
+    <Button
+        android:id="@+id/gotoMainLoopActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="mainLoopActivity"
+        />
+    <Button
+    android:id="@+id/gotoStaticActivity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="staticActivity"
+    />
+    <Button
+    android:id="@+id/gotoWeakActivity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="WeakActivity"
+    />
+    <Button
+    android:id="@+id/gotoWeakHandlerActivity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="WeakHandlerActivity"
+    />
+</LinearLayout>

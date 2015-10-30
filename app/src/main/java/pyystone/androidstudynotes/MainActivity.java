@@ -1,11 +1,11 @@
 package pyystone.androidstudynotes;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import pyystone.androidstudynotes.memory.handler.HandlerMainActivity;
 import pyystone.androidstudynotes.ui.UIActivity;
 import pyystone.androidstudynotes.version.VersionMgrActivity;
 
@@ -16,6 +16,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.UI).setOnClickListener(this);
         findViewById(R.id.thread).setOnClickListener(this);
         findViewById(R.id.version).setOnClickListener(this);
+        findViewById(R.id.handler).setOnClickListener(this);
     }
 
     @Override
@@ -56,6 +57,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         } else if (id == R.id.version) {
             intent.setClass(this, VersionMgrActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.handler) {
+            intent.setClass(this, HandlerMainActivity.class);
             startActivity(intent);
         }
 
