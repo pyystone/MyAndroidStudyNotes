@@ -9,6 +9,8 @@ import pyystone.androidstudynotes.memory.handler.HandlerMainActivity;
 import pyystone.androidstudynotes.ui.UIActivity;
 import pyystone.androidstudynotes.version.VersionMgrActivity;
 
+// 这是主Activity
+
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
