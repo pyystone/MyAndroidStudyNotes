@@ -26,9 +26,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         initUI();
     }
 
-    protected void initUI() {
-
-    }
+    protected abstract void initUI();
 
     protected abstract int getLayoutId();
 

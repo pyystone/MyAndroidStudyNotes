@@ -4,11 +4,11 @@ apply plugin: 'com.zeroturnaround.jrebel.android'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "23.0.0 rc3"
+    buildToolsVersion '23.0.2'
 
     defaultConfig {
         applicationId "com.pyystone.androidstudynotes"
-        minSdkVersion 9
+        minSdkVersion 13
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -19,6 +19,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+//        playStore {
+//            fileName = "谷歌"
+//            MarkCode = "1"
+//        }
+//        miui {
+//            fileName = "小米"
+//            MarkCode = "2"
+//        }
+//        wandoujia {
+//            f = "豌豆荚"
+//            MarkCode = "3"
+//        }
+    }
+    //批量处理
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [MARKET_CODE: MarkCode]
+    }
+
 }
 
 dependencies {
@@ -26,4 +46,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.felipecsl:gifimageview:1.2.0'
     compile 'com.mcxiaoke.volley:library:1.0.6'
+    compile 'com.android.support:support-v4:22.2.1'
 }

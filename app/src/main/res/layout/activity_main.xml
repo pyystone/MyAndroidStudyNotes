@@ -9,6 +9,7 @@
         android:id="@+id/UI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAllCaps="false"
         android:text="UI"
         />
 
@@ -16,6 +17,7 @@
         android:id="@+id/thread"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAllCaps="false"
         android:text="thread"
         />
 
@@ -23,12 +25,20 @@
         android:id="@+id/version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAllCaps="false"
         android:text="version"
         />
     <Button
         android:id="@+id/handler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAllCaps="false"
         android:text="handler"/>
+    <Button
+        android:id="@+id/pointDebug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="pointDebug"/>
 
 </LinearLayout>
