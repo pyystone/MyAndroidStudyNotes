@@ -19,7 +19,6 @@ public class VersionMgrActivity extends BaseActivity implements View.OnClickList
 
     @Override
     protected void initUI() {
-        super.initUI();
         findViewById(R.id.marketCode).setOnClickListener(this);
     }
 

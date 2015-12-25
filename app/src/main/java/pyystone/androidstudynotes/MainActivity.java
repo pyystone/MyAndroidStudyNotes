@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import pyystone.androidstudynotes.codedesign.moduledesign.BaseModuleDesignActivity;
 import pyystone.androidstudynotes.debug.point.PointActivity;
 import pyystone.androidstudynotes.memory.handler.HandlerMainActivity;
 import pyystone.androidstudynotes.ui.UIActivity;
@@ -22,6 +23,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.version).setOnClickListener(this);
         findViewById(R.id.handler).setOnClickListener(this);
         findViewById(R.id.pointDebug).setOnClickListener(this);
+        findViewById(R.id.moduledesign).setOnClickListener(this);
     }
 
     @Override
@@ -68,6 +70,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.pointDebug) {
             intent.setClass(this, PointActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.moduledesign) {
+            intent.setClass(this, BaseModuleDesignActivity.class);
             startActivity(intent);
         }
 

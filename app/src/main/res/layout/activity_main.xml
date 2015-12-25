@@ -40,5 +40,11 @@
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:text="pointDebug"/>
+    <Button
+        android:id="@+id/moduledesign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="moduleDeign"/>
 
 </LinearLayout>

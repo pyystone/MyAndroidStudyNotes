@@ -35,8 +35,8 @@
         <activity android:name=".memory.handler.HandlerActivity"/>
         <activity android:name=".memory.handler.HandlerWeakActivity"/>
         <activity android:name=".memory.handler.HandlerWeakHandlerActivity"/>
-        <activity android:name=".debug.point.PointActivity">
-        </activity>
+        <activity android:name=".debug.point.PointActivity"/>
+        <activity android:name=".codedesign.moduledesign.BaseModuleDesignActivity"/>
     </application>
 
 </manifest>

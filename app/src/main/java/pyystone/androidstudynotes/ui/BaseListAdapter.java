@@ -57,11 +57,11 @@ public class BaseListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.base_list_item,null);
-            TextView tv = (TextView) convertView.findViewById(R.id.tv1);
-            ListItemData item = (ListItemData) getItem(position);
-            tv.setText(item.mTitle);
-            convertView.setTag(item.mTagId);
         }
+        TextView tv = (TextView) convertView.findViewById(R.id.tv1);
+        ListItemData item = (ListItemData) getItem(position);
+        tv.setText(item.mTitle);
+        convertView.setTag(item.mTagId);
         return convertView;
     }
 
