@@ -69,7 +69,7 @@ public class GifUIActivtiy extends BaseActivity implements View.OnClickListener 
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ApplicationUtil.toast(Integer.toString(result));
+                    ApplicationUtil.getInstance().toast(Integer.toString(result));
                 }
             });
         }

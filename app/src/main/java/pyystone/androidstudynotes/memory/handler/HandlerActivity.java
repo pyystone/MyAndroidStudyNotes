@@ -20,7 +20,7 @@ public class HandlerActivity extends HandlerBaseActivity {
         @Override
         public void handleMessage(Message msg) {
             try {
-                ApplicationUtil.toast(getClass().getName() + "has receive!");
+                ApplicationUtil.getInstance().toast(getClass().getName() + "has receive!");
                 Log.e("Handler HandlerActivity", mSyncNoticeView == null ? "view is null" : "view isn't null");
             } catch (Exception e) {
                 e.printStackTrace();

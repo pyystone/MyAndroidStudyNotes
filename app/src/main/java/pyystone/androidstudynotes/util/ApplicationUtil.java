@@ -20,11 +20,11 @@ public class ApplicationUtil {
         return mInstance;
     }
 
-    public static Context getContext() {
+    public Context getContext() {
         return getInstance().mContext;
     }
 
-    public static void toast(String str) {
-        Toast.makeText(getInstance().mContext,str,Toast.LENGTH_SHORT).show();
+    public void toast(String str) {
+        Toast.makeText(mContext,str,Toast.LENGTH_SHORT).show();
     }
 }

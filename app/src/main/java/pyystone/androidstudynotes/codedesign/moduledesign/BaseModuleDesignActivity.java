@@ -25,14 +25,14 @@ public class BaseModuleDesignActivity extends BaseActivity {
         mBottomFragment.setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ApplicationUtil.toast("gotoList1");
+                ApplicationUtil.getInstance().toast("gotoList1");
                 getFragmentManager().beginTransaction().replace(R.id.listFragment,mListFragment).commit();
             }
         });
         mBottomFragment.setRightClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ApplicationUtil.toast("gotoList2");
+                ApplicationUtil.getInstance().toast("gotoList2");
                 getFragmentManager().beginTransaction().replace(R.id.listFragment,mListFragment2).commit();
             }
         });

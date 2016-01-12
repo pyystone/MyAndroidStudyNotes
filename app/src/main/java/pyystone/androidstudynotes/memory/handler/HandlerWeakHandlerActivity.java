@@ -23,7 +23,7 @@ public class HandlerWeakHandlerActivity extends HandlerBaseActivity {
         public boolean handleMessage(Message msg) {
 
             if(mSyncNoticeView == null) {
-                ApplicationUtil.toast(getClass().getName() + "has receive!");
+                ApplicationUtil.getInstance().toast(getClass().getName() + "has receive!");
                 Log.e("Handler WeakHandler","weakActivity isn't null");
                 return true;
             }

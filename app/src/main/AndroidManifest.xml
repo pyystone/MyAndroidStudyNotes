@@ -27,6 +27,7 @@
         </activity>
         <activity android:name=".ui.UIActivity"/>
         <activity android:name=".ui.GifUIActivtiy"/>
+        <activity android:name=".ui.UserHeadActivity"/>
         <activity android:name=".version.VersionMgrActivity"/>
         <activity android:name=".memory.handler.HandlerMainActivity"/>
         <activity android:name=".memory.handler.Handler2MainLoopActivity"/>

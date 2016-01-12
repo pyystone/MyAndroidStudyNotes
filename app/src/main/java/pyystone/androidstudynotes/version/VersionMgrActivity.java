@@ -41,7 +41,7 @@ public class VersionMgrActivity extends BaseActivity implements View.OnClickList
      *
      */
     private void doMarketCode() {
-        ApplicationUtil.toast("marketCode:" + ChannelUtil.getChannel(this));
+        ApplicationUtil.getInstance().toast("marketCode:" + ChannelUtil.getChannel(this));
 
     }
 }

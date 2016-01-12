@@ -28,8 +28,8 @@ public class HandlerStaticActivity extends HandlerBaseActivity {
         public void handleMessage(Message msg) {
             // do something
             try {
-                ApplicationUtil.toast(mActivity.getClass().getName() + "has receive!");
-                Log.e("Handler HandlerStaticActivity", ((HandlerStaticActivity)mActivity).mSyncNoticeView == null ? "view is null" : "view isn't null");
+                ApplicationUtil.getInstance().toast(mActivity.getClass().getName() + "has receive!");
+                Log.e("HandlerStatic", ((HandlerStaticActivity)mActivity).mSyncNoticeView == null ? "view is null" : "view isn't null");
             } catch (Exception e) {
                 e.printStackTrace();
             }

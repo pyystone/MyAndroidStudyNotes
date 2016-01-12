@@ -57,6 +57,6 @@ public class BaseModuleDesignListFragment extends Fragment implements AdapterVie
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ApplicationUtil.toast(((TextView)view.findViewById(R.id.tv1)).getText().toString());
+        ApplicationUtil.getInstance().toast(((TextView)view.findViewById(R.id.tv1)).getText().toString());
     }
 }

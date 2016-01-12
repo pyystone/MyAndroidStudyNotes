@@ -21,8 +21,8 @@ public class Handler2MainLoopActivity extends HandlerBaseActivity {
         @Override
         public boolean handleMessage(Message msg) {
         try {
-            ApplicationUtil.toast(getClass().getName() + "has receive!");
-            Log.e("Handler Handler2MainLoopActivity",mSyncNoticeView == null ? "view is null" : "view isn't null");
+            ApplicationUtil.getInstance().toast(getClass().getName() + "has receive!");
+            Log.e("Handler2MainLoop",mSyncNoticeView == null ? "view is null" : "view isn't null");
         } catch (Exception e) {
             e.printStackTrace();
         }

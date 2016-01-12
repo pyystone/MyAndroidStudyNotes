@@ -2,4 +2,7 @@
 <resources>
     <color name="white">#ffffff</color>
     <color name="white15">#26ffffff</color>
+    <color name="blue">#00afff</color>
+    <drawable name="actionbarItemClick">#b52f25</drawable>
+    <color name="orange">#ff8f00</color>
 </resources>

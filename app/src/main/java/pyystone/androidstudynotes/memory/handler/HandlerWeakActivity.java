@@ -28,7 +28,7 @@ public class HandlerWeakActivity extends HandlerBaseActivity {
         @Override
         public void handleMessage(Message msg) {
             if(mActivity.get() == null) {
-                ApplicationUtil.toast(mActivity.getClass().getName() + "has receive!");
+                ApplicationUtil.getInstance().toast(mActivity.getClass().getName() + "has receive!");
                 Log.e("Handler rWeakActivity","weakActivity isn't null");
                 return;
             }
