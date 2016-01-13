@@ -11,7 +11,6 @@ import android.view.ViewTreeObserver;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import pyystone.androidstudynotes.R;
-import pyystone.androidstudynotes.widget.HeaderScrollview;
 
 /**
  * Created by pyysotne on 2016/1/9.

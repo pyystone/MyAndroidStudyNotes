@@ -7,6 +7,7 @@ import android.os.SystemClock;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -16,7 +17,6 @@ import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.OverScroller;
 import android.widget.TextView;
 
 import pyystone.androidstudynotes.R;
@@ -29,8 +29,7 @@ import pyystone.androidstudynotes.R;
  * 感谢赵新gg的demo里面的dispatchTouchEvent 提供思路
  * @zhaoxin http://github.com/zhaoxin1943
  */
-public class HeaderScrollview extends LinearLayout {
-    private final static int MAX_Y_VELOCITY = 8000;
+public class HeadScrollView extends LinearLayout {
     private final static int MIN_TOP_VIEW = 15;
 
     private ImageView mImageView;
@@ -44,13 +43,11 @@ public class HeaderScrollview extends LinearLayout {
 
     private VelocityTracker mVelocityTracker;
     private int mActivePointerId = -1;
-    private int mMinFlingVelocity ;
     private int mActionBarHeight = 100;
     private int mMaxTopHeight;
-    private boolean mIsInCanMoveView;
+    private boolean mIsInCanMoveView;// 按下的区域是不是contentview 区域
 
 
-    private OverScroller mScroller;
     private int headViewMaxHeight;
     private int headZoomHeight;
     private int imageViewMaxHeight;
@@ -67,17 +64,17 @@ public class HeaderScrollview extends LinearLayout {
 
     private FlingRunnable mFlingRunnable;
 
-    public HeaderScrollview(Context context) {
+    public HeadScrollView(Context context) {
         super(context);
         initUI();
     }
 
-    public HeaderScrollview(Context context, AttributeSet attrs) {
+    public HeadScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initUI();
     }
 
-    public HeaderScrollview(Context context, AttributeSet attrs, int defStyle) {
+    public HeadScrollView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initUI();
     }
@@ -101,8 +98,6 @@ public class HeaderScrollview extends LinearLayout {
         mTopView = findViewById(R.id.topView);
 
         ViewConfiguration vc = ViewConfiguration.get(getContext());
-        mMinFlingVelocity = vc.getScaledMinimumFlingVelocity();
-        mScroller = new OverScroller(getContext());
         mFlingRunnable = new FlingRunnable();
     }
 
@@ -145,20 +140,18 @@ public class HeaderScrollview extends LinearLayout {
                 mLastX = initialDownX;
                 mLastY = initialDownY;
 
-                if (isTouchInsideView(ev,mContentView)) {
-                    mIsInCanMoveView = true;
-                } else {
-                    mIsInCanMoveView = false;
+                mIsInCanMoveView = isTouchInsideView(ev, mContentView);
+
+                if (!mFlingRunnable.isFinished()) {
+                    mFlingRunnable.abortAnimation();
                 }
+
                 if (initialDownX == -1 || initialDownY == -1 || isTouchInsideView(ev,mContentView) || isTouchInsideView(ev,mBack)) {
                     return super.dispatchTouchEvent(ev);
                 }
 
                 if (getScrollY() < headZoomHeight) {
                     return true;
-                }
-                if (!mFlingRunnable.isFinished()) {
-                    mFlingRunnable.abortAnimation();
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -171,7 +164,6 @@ public class HeaderScrollview extends LinearLayout {
                 if (y == -1 || x == -1) {
                     return super.dispatchTouchEvent(ev);
                 }
-
 
                 final float yDiff = y - mLastY;
                 final float xDiff = x - mLastX;
@@ -194,11 +186,9 @@ public class HeaderScrollview extends LinearLayout {
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
                 mVelocityTracker.addMovement(ev);
-                mVelocityTracker.computeCurrentVelocity(1000);
-                float yVelovity = mVelocityTracker.getYVelocity(mActivePointerId);
-                if (Math.abs(yVelovity) > mMinFlingVelocity) {
-                    handleFling(yVelovity);
-                }
+                mVelocityTracker.computeCurrentVelocity(200);
+                mFlingRunnable.startAnimation(200, (int) mVelocityTracker.getYVelocity(mActivePointerId));
+
                 mActivePointerId = -1;
                 mVelocityTracker.clear();
                 mLastX = 0;
@@ -208,37 +198,12 @@ public class HeaderScrollview extends LinearLayout {
         return super.dispatchTouchEvent(ev);
     }
 
-    private void handleFling(float yVelocity) {
-        if (yVelocity > MAX_Y_VELOCITY) {
-            smoothScrollTo(getScrollY() + (headZoomHeight - nowZoomHeight),-1);
-        } else if (-yVelocity > MAX_Y_VELOCITY) {
-            smoothScrollTo(headZoomHeight +mContentView.getMeasuredHeight(),1);
-        } else {
-            int dy = (int) (Math.abs(yVelocity) / 50);
-//            if (yVelocity > 0) {
-//                if (getScrollY() < dy) {
-//                    dy = getScrollY();
-//                }
-//            } else {
-//                if (getScrollY() + dy > headZoomHeight) {
-//                    dy = headZoomHeight - getScrollY();
-//                }
-//            }
-            smoothScrollTo(dy, yVelocity > 0 ? -1 : 1);
-        }
-    }
-
     private boolean isTouchInsideView(MotionEvent ev, View view) {
         float viewY = ViewCompat.getY(view) - getScrollY();
         RectF rect = new RectF(ViewCompat.getX(view), viewY, ViewCompat.getX(view) + view.getWidth(), viewY + view.getHeight());
         float x = getMotionEventX(ev, mActivePointerId);
         float y = getMotionEventY(ev, mActivePointerId);
         return rect.contains(x, y);
-    }
-
-    private void smoothScrollTo(int dy , int direction) {
-        mScroller.startScroll(0,getScrollY(),0,direction > 0 ? dy : -dy);
-        invalidate();
     }
 
     private void zoomHeadView(int yDiff) {
@@ -267,10 +232,10 @@ public class HeaderScrollview extends LinearLayout {
         mTopView.setLayoutParams(topParams);
 
         c = c < 0.5 ? c * 2 : 1;
-        int aphal = (int) ((1 - c) * 255);
-        mUserName.setTextColor(Color.argb(aphal,255,255,255));
-        mLvName.setTextColor(Color.argb(aphal,255,255,255));
-        mLvName.setBackgroundColor(Color.argb(aphal,255,125,0));
+        float aphal =  (1 - c);
+        mUserName.setAlpha(aphal);
+        mLvName.setAlpha(aphal);
+        mLvName.setAlpha(aphal);
     }
 
     /**
@@ -295,7 +260,6 @@ public class HeaderScrollview extends LinearLayout {
     class FlingRunnable implements Runnable {
         long mDuration;
         boolean mIsFinished = true;
-        float mScale;
         long mStartTime;
         int zoomHeight;
         int imageZoomHeight;
@@ -315,33 +279,33 @@ public class HeaderScrollview extends LinearLayout {
 
         public void run() {
             int diffy;
-            if ((!mIsFinished)) {
+            if (!mIsFinished) {
                 float f1 = ((float) SystemClock.currentThreadTimeMillis() - (float) mStartTime) / (float) mDuration;
                 diffy = (int) (zoomHeight * sInterpolator.getInterpolation(f1));
                 int tempDiff = diffy - lastMoveY;
                 lastMoveY = diffy;
                 diffy = tempDiff;
-                if (diffy < zoomHeight) {
-                    if (diffy > 0) {
-                        if (nowZoomHeight > diffy) {
-                            diffy = 0;
+                if (f1 < 1) {
+                    if (diffy < 0) {
+                        if ((headZoomHeight - nowZoomHeight) > -diffy) {
                             zoomHeadView(diffy);
+                            diffy = 0;
                         } else {
-                            diffy -= nowZoomHeight;
-                            zoomHeadView(nowZoomHeight);
+                            diffy += (headZoomHeight - nowZoomHeight);
+                            zoomHeadView(-nowZoomHeight);
                         }
-                        if (diffy != 0) {
-                            mContentView.scrollTo(0, diffy);
+                        if (diffy <= 0) {
+                            mContentView.scrollBy(0, -diffy);
                         }
                     } else {
                         if (mContentView.getScrollY() > diffy) {
+                            mContentView.scrollBy(0,-diffy);
                             diffy = 0;
-                            mContentView.scrollTo(0,diffy);
-                        } else {
-                            diffy += mContentView.getScrollY();
-                            mContentView.scrollTo(0,mContentView.getScrollY());
+                        } else if (mContentView.getScrollY() > 0) {
+                            diffy -= mContentView.getScrollY();
+                            mContentView.scrollTo(0,0);
                         }
-                        if (diffy != 0) {
+                        if (diffy >= 0) {
                             zoomHeadView(diffy);
                         }
                     }
