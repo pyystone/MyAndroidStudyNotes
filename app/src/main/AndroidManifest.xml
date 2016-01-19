@@ -38,6 +38,8 @@
         <activity android:name=".memory.handler.HandlerWeakHandlerActivity"/>
         <activity android:name=".debug.point.PointActivity"/>
         <activity android:name=".codedesign.moduledesign.BaseModuleDesignActivity"/>
+        <activity android:name=".ui.PopUpMessageActivity">
+        </activity>
     </application>
 
 </manifest>

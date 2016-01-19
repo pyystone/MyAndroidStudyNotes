@@ -1,9 +1,6 @@
 package pyystone.androidstudynotes.ui;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -24,6 +21,7 @@ import pyystone.androidstudynotes.R;
 public class UIActivity extends BaseActivity implements AdapterView.OnItemClickListener {
     private static final int GOTO_GIFUI = 1;
     private static final int GOTO_USER_HEAD = 2;
+    private static final int GOTO_POPUP_MESSAGE = 3;
 
     protected void initUI() {
         ListView listView = (ListView) findViewById(R.id.listview);
@@ -47,6 +45,10 @@ public class UIActivity extends BaseActivity implements AdapterView.OnItemClickL
         item2.mTitle = "UserHead";
         item2.mTagId = GOTO_USER_HEAD;
         data.add(item2);
+        ListItemData item3 = new ListItemData();
+        item2.mTitle = "PopupMessage";
+        item2.mTagId = GOTO_POPUP_MESSAGE;
+        data.add(item3);
         return data;
     }
 
@@ -59,6 +61,9 @@ public class UIActivity extends BaseActivity implements AdapterView.OnItemClickL
             startActivity(intent);
         } else if (tag == GOTO_USER_HEAD) {
             intent = new Intent(this, UserHeadActivity.class);
+            startActivity(intent);
+        } else if (tag == GOTO_POPUP_MESSAGE) {
+            intent = new Intent(this,PopUpMessageActivity.class);
             startActivity(intent);
         }
     }
