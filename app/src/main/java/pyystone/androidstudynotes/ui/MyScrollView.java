@@ -3,6 +3,7 @@ package pyystone.androidstudynotes.ui;
 import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ScrollView;
 
@@ -43,43 +44,51 @@ public class MyScrollView extends ScrollView {
     /**
      * 用于用户手指离开MyScrollView的时候获取MyScrollView滚动的Y距离，然后回调给onScroll方法中
      */
-    private Handler handler = new Handler() {
-
-        public void handleMessage(android.os.Message msg) {
-            int scrollY = MyScrollView.this.getScrollY();
-
-            //此时的距离和记录下的距离不相等，在隔5毫秒给handler发送消息
-            if(lastScrollY != scrollY){
-                lastScrollY = scrollY;
-                handler.sendMessageDelayed(handler.obtainMessage(), 20);
-            }
-            if(mOnScrollListener != null){
-                mOnScrollListener.onScroll(scrollY);
-            }
-
-        };
-
-    };
+//    private Handler handler = new Handler() {
+//
+//        public void handleMessage(android.os.Message msg) {
+//            int scrollY = MyScrollView.this.getScrollY();
+//
+//            //此时的距离和记录下的距离不相等，在隔5毫秒给handler发送消息
+//            if(lastScrollY != scrollY){
+//                lastScrollY = scrollY;
+//                handler.sendMessageDelayed(handler.obtainMessage(), 20);
+//            }
+//            if(mOnScrollListener != null){
+//                mOnScrollListener.onScroll(scrollY);
+//            }
+//
+//        };
+//
+//    };
 
     /**
      * 重写onTouchEvent， 当用户的手在MyScrollView上面的时候，
      * 直接将MyScrollView滑动的Y方向距离回调给onScroll方法中，当用户抬起手的时候，
      * MyScrollView可能还在滑动，所以当用户抬起手我们隔5毫秒给handler发送消息，在handler处理
      * MyScrollView滑动的距离
+     * 这里的实现方式在滑动的时候会造成因为handler时间过短出现短时间的 lastScrollY == scrolly的情况
+     * 时间过长会导致动画不是很流畅
      */
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        if(mOnScrollListener != null){
-            mOnScrollListener.onScroll(lastScrollY = this.getScrollY());
-        }
-        switch(ev.getAction()){
-            case MotionEvent.ACTION_UP:
-                handler.sendMessageDelayed(handler.obtainMessage(), 20);
-                break;
-        }
+//        if(mOnScrollListener != null){
+//            mOnScrollListener.onScroll(lastScrollY = this.getScrollY());
+//        }
+//        switch(ev.getAction()){
+//            case MotionEvent.ACTION_UP:
+//                handler.sendMessageDelayed(handler.obtainMessage(), 20);
+//                break;
+//        }
         return super.onTouchEvent(ev);
     }
 
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        mOnScrollListener.onScroll(t);
+    }
 
     /**
      *
