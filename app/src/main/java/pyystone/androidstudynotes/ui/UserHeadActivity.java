@@ -11,7 +11,6 @@ import pyystone.androidstudynotes.R;
  */
 public class UserHeadActivity extends BaseActivity {
 
-    private UserHeadFragment mFragment;
     @Override
     protected void initUI() {
 //        mFragment = new UserHeadFragment();

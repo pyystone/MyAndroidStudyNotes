@@ -46,8 +46,8 @@ public class UIActivity extends BaseActivity implements AdapterView.OnItemClickL
         item2.mTagId = GOTO_USER_HEAD;
         data.add(item2);
         ListItemData item3 = new ListItemData();
-        item2.mTitle = "PopupMessage";
-        item2.mTagId = GOTO_POPUP_MESSAGE;
+        item3.mTitle = "PopupMessage";
+        item3.mTagId = GOTO_POPUP_MESSAGE;
         data.add(item3);
         return data;
     }
