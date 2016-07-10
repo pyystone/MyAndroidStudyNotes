@@ -11,31 +11,50 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+        buildConfigField "boolean", "IS_DEBUG", "false"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+
+        applicationVariants.all { variant ->
+            variant.outputs.each { output ->
+                def outputFile = output.outputFile
+                if (null != outputFile && outputFile.name.endsWith('.apk')) {
+                    def marketCode = variant.productFlavors[0].ext.marketCode
+                    def MarkName = variant.productFlavors[0].ext.MarkName.trim()
+                    def fileName = "${MarkName}_${marketCode}_v${defaultConfig.versionName}_${defaultConfig.versionCode}.apk"
+                    output.outputFile = new File(outputFile.parent, fileName)
+                }
+            }
+        }
     }
 
     productFlavors {
+        ceshi {
+            buildConfigField "boolean", "IS_DEBUG", "true"
+            ext.MarkName = "测试"
+            ext.MarkCode = "0"
+        }
 //        playStore {
-//            fileName = "谷歌"
-//            MarkCode = "1"
+//            ext.MarkName = "谷歌"
+//            ext.MarkCode = "1"
 //        }
 //        miui {
-//            fileName = "小米"
-//            MarkCode = "2"
+//            ext.MarkName = "小米"
+//            ext.MarkCode = "2"
 //        }
 //        wandoujia {
-//            f = "豌豆荚"
-//            MarkCode = "3"
+//            ext.MarkName = "豌豆荚"
+//            ext.MarkCode = "3"
 //        }
     }
     //批量处理
     productFlavors.all {
-        flavor -> flavor.manifestPlaceholders = [MARKET_CODE: MarkCode]
+        flavor -> flavor.manifestPlaceholders = [MARKET_CODE: ext.MarkCode]
     }
 
 }
