@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 // This does not break the build when Android Studio is missing the JRebel for Android plugin.
 
 android {
@@ -11,10 +12,17 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+        multiDexEnabled = true
+
         buildConfigField "boolean", "IS_DEBUG", "false"
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            multiDexEnabled true
+        }
         release {
+            multiDexEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -24,20 +32,28 @@ android {
             variant.outputs.each { output ->
                 def outputFile = output.outputFile
                 if (null != outputFile && outputFile.name.endsWith('.apk')) {
-                    def marketCode = variant.productFlavors[0].ext.marketCode
-                    def MarkName = variant.productFlavors[0].ext.MarkName.trim()
+                    def marketCode = variant.productFlavors[0].ext.MarketCode
+                    def MarkName = variant.productFlavors[0].ext.MarketName.trim()
                     def fileName = "${MarkName}_${marketCode}_v${defaultConfig.versionName}_${defaultConfig.versionCode}.apk"
                     output.outputFile = new File(outputFile.parent, fileName)
+                }
+            }
+
+            task "fix${variant.name.capitalize()}MultiDexComponents" << {
+                File keepFile = new File("$buildDir/intermediates/multi-dex/${variant.productFlavors[0].name}/$variant.buildType.name/manifest_keep.txt")
+                keepFile.withWriter { w ->
+                    w << new File("${projectDir}/multidex.keep").text
                 }
             }
         }
     }
 
+
     productFlavors {
         ceshi {
             buildConfigField "boolean", "IS_DEBUG", "true"
-            ext.MarkName = "测试"
-            ext.MarkCode = "0"
+            ext.MarketName = "测试"
+            ext.MarketCode = "0"
         }
 //        playStore {
 //            ext.MarkName = "谷歌"
@@ -54,9 +70,20 @@ android {
     }
     //批量处理
     productFlavors.all {
-        flavor -> flavor.manifestPlaceholders = [MARKET_CODE: ext.MarkCode]
+        flavor -> flavor.manifestPlaceholders = [MARKET_CODE: ext.MarketCode]
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
     }
 
+}
+
+tasks.whenTaskAdded { task ->
+    android.applicationVariants.all { variant ->
+        if (task.name == "collect${variant.name.capitalize()}MultiDexComponents") {
+            task.finalizedBy "fix${variant.name.capitalize()}MultiDexComponents"
+        }
+    }
 }
 
 dependencies {
@@ -68,4 +95,8 @@ dependencies {
     compile 'com.mcxiaoke.volley:library:1.0.6'
     compile 'com.android.support:support-v4:22.2.1'
     compile 'com.makeramen:roundedimageview:2.2.1'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 import pyystone.androidstudynotes.BaseActivity;
 import pyystone.androidstudynotes.R;
+import pyystone.androidstudynotes.ui.activity.ParticleActivity;
 
 /**
  * Created by pyysotne on 2015/08/21/0021.
@@ -22,6 +23,7 @@ public class UIActivity extends BaseActivity implements AdapterView.OnItemClickL
     private static final int GOTO_GIFUI = 1;
     private static final int GOTO_USER_HEAD = 2;
     private static final int GOTO_POPUP_MESSAGE = 3;
+    private static final int GOTO_PARTICLEACTIVITY = 4;
 
     protected void initUI() {
         ListView listView = (ListView) findViewById(R.id.listview);
@@ -49,6 +51,10 @@ public class UIActivity extends BaseActivity implements AdapterView.OnItemClickL
         item3.mTitle = "PopupMessage";
         item3.mTagId = GOTO_POPUP_MESSAGE;
         data.add(item3);
+        ListItemData item4 = new ListItemData();
+        item4.mTitle = "ParticleActivity";
+        item4.mTagId = GOTO_PARTICLEACTIVITY;
+        data.add(item4);
         return data;
     }
 
@@ -64,6 +70,9 @@ public class UIActivity extends BaseActivity implements AdapterView.OnItemClickL
             startActivity(intent);
         } else if (tag == GOTO_POPUP_MESSAGE) {
             intent = new Intent(this,PopUpMessageActivity.class);
+            startActivity(intent);
+        } else if (tag == GOTO_PARTICLEACTIVITY) {
+            intent = new Intent(this,ParticleActivity.class);
             startActivity(intent);
         }
     }
