@@ -8,8 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="pyystone.androidstudynotes.ui.activity.ParticleActivity">
-    <pyystone.androidstudynotes.ui.ParticleView
+    tools:context="com.androidstudynotes.ui.activity.ParticleActivity">
+    <com.androidstudynotes.ui.ParticleView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />

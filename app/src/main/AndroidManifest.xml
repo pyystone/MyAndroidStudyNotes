@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="pyystone.androidstudynotes">
+    package="com.androidstudynotes">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -40,7 +40,8 @@
         <activity android:name=".codedesign.moduledesign.BaseModuleDesignActivity" />
         <activity android:name=".ui.PopUpMessageActivity" />
         <activity android:name=".ui.activity.ParticleActivity" />
-        <activity android:name=".ui.activity.VIewListActivity"></activity>
+        <activity android:name=".ui.activity.VIewListActivity" />
+        <activity android:name=".ui.activity.FragmentViewPagerActivity"></activity>
     </application>
 
 </manifest>
