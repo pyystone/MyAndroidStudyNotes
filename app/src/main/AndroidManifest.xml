@@ -41,7 +41,7 @@
         <activity android:name=".ui.PopUpMessageActivity" />
         <activity android:name=".ui.activity.ParticleActivity" />
         <activity android:name=".ui.activity.VIewListActivity" />
-        <activity android:name=".ui.activity.FragmentViewPagerActivity"></activity>
+        <activity android:name=".ui.activity.FragmentViewPagerActivity"/>
     </application>
 
 </manifest>

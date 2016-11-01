@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.androidstudynotes.BaseActivity;
 import com.androidstudynotes.R;
+import com.androidstudynotes.ui.activity.FragmentViewPagerActivity;
 import com.androidstudynotes.ui.activity.ParticleActivity;
 
 /**
@@ -24,6 +25,7 @@ public class UIActivity extends BaseActivity implements AdapterView.OnItemClickL
     private static final int GOTO_USER_HEAD = 2;
     private static final int GOTO_POPUP_MESSAGE = 3;
     private static final int GOTO_PARTICLEACTIVITY = 4;
+    private static final int GOTO_FRAGMENT_VIEW_PAGER = 5;
 
     protected void initUI() {
         ListView listView = (ListView) findViewById(R.id.listview);
@@ -55,25 +57,28 @@ public class UIActivity extends BaseActivity implements AdapterView.OnItemClickL
         item4.mTitle = "ParticleActivity";
         item4.mTagId = GOTO_PARTICLEACTIVITY;
         data.add(item4);
+        ListItemData item5 = new ListItemData();
+        item5.mTitle = "FragmentViewPagerActivity";
+        item5.mTagId = GOTO_FRAGMENT_VIEW_PAGER;
+        data.add(item5);
         return data;
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         int tag = (int) view.getTag();
-        Intent intent;
+        Intent intent = null;
         if (tag == GOTO_GIFUI) {
             intent = new Intent(this, GifUIActivtiy.class);
-            startActivity(intent);
         } else if (tag == GOTO_USER_HEAD) {
             intent = new Intent(this, UserHeadActivity.class);
-            startActivity(intent);
         } else if (tag == GOTO_POPUP_MESSAGE) {
             intent = new Intent(this,PopUpMessageActivity.class);
-            startActivity(intent);
         } else if (tag == GOTO_PARTICLEACTIVITY) {
             intent = new Intent(this,ParticleActivity.class);
-            startActivity(intent);
+        } else if (tag == GOTO_FRAGMENT_VIEW_PAGER) {
+            intent = new Intent(this, FragmentViewPagerActivity.class);
         }
+        startActivity(intent);
     }
 }
