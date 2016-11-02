@@ -14,6 +14,8 @@ import com.androidstudynotes.R
  * email: pyystone@163.com
  * QQ: 862429936
  * github: https://github.com/pyystone
+ *
+ * 每次都会重复创建 初始化 onCreateView onResume
  */
 class FragmentPager3 : Fragment() {
 

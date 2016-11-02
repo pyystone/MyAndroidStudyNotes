@@ -14,6 +14,7 @@ import com.androidstudynotes.R
  * email: pyystone@163.com
  * QQ: 862429936
  * github: https://github.com/pyystone
+ * 在 Adapter层控制了这个Fragment不会被回收，但是对外提供了refreshView 方法，在Activity中使用
  */
 class FragmentPager4 : Fragment() {
 
@@ -36,6 +37,9 @@ class FragmentPager4 : Fragment() {
 
     }
 
+    fun refreshView() {
+        mCount?.text = count++.toString()
+    }
 
     override fun onResume() {
         super.onResume()

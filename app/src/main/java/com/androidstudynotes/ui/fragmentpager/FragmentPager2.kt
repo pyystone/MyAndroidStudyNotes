@@ -14,6 +14,8 @@ import com.androidstudynotes.R
  * email: pyystone@163.com
  * QQ: 862429936
  * github: https://github.com/pyystone
+ *
+ * 自我控制刷新fragment
  */
 class FragmentPager2 : Fragment() {
 

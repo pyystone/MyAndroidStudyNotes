@@ -14,6 +14,9 @@ import com.androidstudynotes.R
  * email: pyystone@163.com
  * QQ: 862429936
  * github: https://github.com/pyystone
+ * code shelf life : forever :-D
+ *
+ * 普通fragment
  */
 class FragmentPager1 : Fragment() {
 
