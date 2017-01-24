@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
 // This does not break the build when Android Studio is missing the JRebel for Android plugin.
 
 android {
@@ -8,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.pyystone.androidstudynotes"
-        minSdkVersion 14
+        minSdkVersion 19
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
