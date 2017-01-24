@@ -8,6 +8,7 @@ import android.view.View;
 import com.androidstudynotes.codedesign.moduledesign.BaseModuleDesignActivity;
 import com.androidstudynotes.debug.point.PointActivity;
 import com.androidstudynotes.memory.handler.HandlerMainActivity;
+import com.androidstudynotes.sms.SMSWriterActivity;
 import com.androidstudynotes.ui.UIActivity;
 import com.androidstudynotes.version.VersionMgrActivity;
 
@@ -23,6 +24,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.handler).setOnClickListener(this);
         findViewById(R.id.pointDebug).setOnClickListener(this);
         findViewById(R.id.moduledesign).setOnClickListener(this);
+        findViewById(R.id.smsWriter).setOnClickListener(this);
     }
 
     @Override
@@ -72,6 +74,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             startActivity(intent);
         } else if (id == R.id.moduledesign) {
             intent.setClass(this, BaseModuleDesignActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.smsWriter) {
+            intent.setClass(this, SMSWriterActivity.class);
             startActivity(intent);
         }
 

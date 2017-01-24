@@ -1,0 +1,18 @@
+package com.androidstudynotes.sms
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import com.androidstudynotes.R
+
+class SMSWriterActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_smswriter)
+        initUI()
+    }
+
+    private fun initUI() {
+
+    }
+}
