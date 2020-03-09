@@ -5,18 +5,19 @@ apply plugin: 'kotlin-android-extensions'
 // This does not break the build when Android Studio is missing the JRebel for Android plugin.
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion '23.0.2'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "com.pyystone.androidstudynotes"
         minSdkVersion 19
-        targetSdkVersion 22
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         multiDexEnabled = true
 
         buildConfigField "boolean", "IS_DEBUG", "false"
+        flavorDimensions "versionCode"
     }
     buildTypes {
         debug {
@@ -31,22 +32,21 @@ android {
 
 
         applicationVariants.all { variant ->
-            variant.outputs.each { output ->
+            variant.outputs.all { output ->
                 def outputFile = output.outputFile
                 if (null != outputFile && outputFile.name.endsWith('.apk')) {
                     def marketCode = variant.productFlavors[0].ext.MarketCode
                     def MarkName = variant.productFlavors[0].ext.MarketName.trim()
-                    def fileName = "${MarkName}_${marketCode}_v${defaultConfig.versionName}_${defaultConfig.versionCode}.apk"
-                    output.outputFile = new File(outputFile.parent, fileName)
+                    outputFileName = "${MarkName}_${marketCode}_v${defaultConfig.versionName}_${defaultConfig.versionCode}.apk"
                 }
             }
 
-            task "fix${variant.name.capitalize()}MultiDexComponents" << {
-                File keepFile = new File("$buildDir/intermediates/multi-dex/${variant.productFlavors[0].name}/$variant.buildType.name/manifest_keep.txt")
-                keepFile.withWriter { w ->
-                    w << new File("${projectDir}/multidex.keep").text
-                }
-            }
+//            task "fix${variant.name.capitalize()}MultiDexComponents" << {
+//                File keepFile = new File("$buildDir/intermediates/multi-dex/${variant.productFlavors[0].name}/$variant.buildType.name/manifest_keep.txt")
+//                keepFile.withWriter { w ->
+//                    w << new File("${projectDir}/multidex.keep").text
+//                }
+//            }
         }
     }
 
@@ -77,6 +77,10 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 
 }
 
@@ -92,12 +96,12 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     // 圆形头像
-    compile 'com.android.support:appcompat-v7:22.2.1'
-    compile 'com.felipecsl:gifimageview:1.2.0'
-    compile 'com.mcxiaoke.volley:library:1.0.6'
-    compile 'com.android.support:support-v4:22.2.1'
-    compile 'com.makeramen:roundedimageview:2.2.1'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile 'com.android.support:appcompat-v7:28.0.0'
+    compile 'com.felipecsl:gifimageview:2.2.0'
+    compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile 'com.android.support:support-v4:28.0.0'
+    compile 'com.makeramen:roundedimageview:2.3.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:1.3.70"
 }
 repositories {
     mavenCentral()

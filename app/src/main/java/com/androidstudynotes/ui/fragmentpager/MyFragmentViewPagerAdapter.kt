@@ -28,14 +28,14 @@ class MyFragmentViewPagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm
         mData.add(page(title,fragment))
     }
 
-    override fun instantiateItem(container: ViewGroup?, position: Int): Any {
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
         return super.instantiateItem(container, position)
     }
 
     /**
      * 对可能耗时的view 进行缓存
      */
-    override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
 
         if (getItem(position) is FragmentPager4) {
             return

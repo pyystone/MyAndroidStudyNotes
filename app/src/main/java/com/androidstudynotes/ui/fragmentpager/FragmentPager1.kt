@@ -24,12 +24,14 @@ class FragmentPager1 : Fragment() {
     var mCount : TextView? = null
     var mTitle : TextView? = null
     var count = 0
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_pager,container,false)
         mRootView = view
         initUI()
         return view
     }
+
 
     private fun initUI() {
         mCount = mRootView?.findViewById(R.id.refershCount) as TextView

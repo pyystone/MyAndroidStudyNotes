@@ -23,7 +23,7 @@ class FragmentPager2 : Fragment() {
     var mCount : TextView? = null
     var mTitle : TextView? = null
     var count = 0
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (count > 0) {
             return mRootView
         }
